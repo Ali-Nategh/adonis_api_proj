@@ -1,11 +1,11 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class AuthController {
-    public static register(ctx: HttpContextContract) {
-        return ctx.request.body
+    public async register({ }: HttpContextContract) {
+        return
     }
 
-    public static login(ctx: HttpContextContract) {
-        return ctx.request.body
+    public async login({ }: HttpContextContract) {
+        return
     }
 }
