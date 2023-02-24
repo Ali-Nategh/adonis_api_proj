@@ -24,6 +24,7 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
+
 Route.resource('users', 'UsersController').apiOnly()
 
 Route.resource('users.tasks', 'TasksController').apiOnly()
