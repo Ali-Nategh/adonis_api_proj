@@ -31,4 +31,7 @@ Route.resource('users.tasks', 'TasksController').apiOnly()
 
 
 Route.post('/register', 'AuthController.register')
+
+Route.post('/verify', 'AuthController.verify')
+
 Route.post('/login', 'AuthController.login')
