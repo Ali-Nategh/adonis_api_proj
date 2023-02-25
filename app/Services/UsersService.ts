@@ -20,7 +20,18 @@ class UsersService {
 
         if (!data.email || !data.password || !data.username) {
             response.status(400)
-            return 'Bad Request: email, password and username are required'
+            throw new Error('Bad Request: email, password and username are required')
+        }
+
+        const email_exists = await User.findBy('email', data.email)
+        if (email_exists) {
+            response.status(400)
+            throw new Error('Bad Request: Email already exists')
+        }
+        const username_exists = await User.findBy('username', data.username)
+        if (username_exists) {
+            response.status(400)
+            throw new Error('Bad Request: Username already exists')
         }
 
         await user.merge(data).save()
@@ -34,22 +45,19 @@ class UsersService {
 
 
     public static async update(ctx: HttpContextContract) {
-        const user: any = await this.findUserById(ctx)
+        const user = await this.findUserById(ctx)
 
         const data = ctx.request.only(['username', 'email', 'password', 'age', 'name', 'familyName'])
 
-        // if any error ocurred => returned type is string
-        if (typeof user === typeof "") return user
         return await user.merge(data).save()
     }
 
 
     public static async destroy(ctx: HttpContextContract) {
-        const user: any = await this.findUserById(ctx)
+        const user = await this.findUserById(ctx)
 
-        // if any error ocurred => returned type is string
-        if (typeof user === typeof "") return user
         await user.delete()
+
         return user
     }
 
@@ -58,13 +66,15 @@ class UsersService {
         const user_id = request.params().id
         if (!user_id) {
             response.status(400)
-            return 'Bad Request: user id is required'
+            throw new Error('Bad Request: user id is required')
         }
+
         const user = await User.findBy('id', user_id)
         if (!user) {
             response.status(404)
-            return 'Not Found: user not found'
+            throw new Error('Not Found: user not found')
         }
+
         return user
     }
 }
