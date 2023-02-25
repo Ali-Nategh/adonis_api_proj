@@ -5,13 +5,14 @@ export default class extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-      table.integer('user_id').unsigned().references('id').inTable('users').notNullable()
-      table.integer('priority_id').unsigned().references('id').inTable('priorities')
+      table.increments('id').primary()
+      table.integer('user_id').unsigned().references('id').inTable('users')
+        .notNullable().onDelete('CASCADE')
+      table.integer('priority_id').unsigned().references('id').inTable('priorities').notNullable()
 
       table.string('title', 100).notNullable()
-      table.text('body')
-      table.json('thumbnail') // Task Image
+      table.text('body').nullable()
+      table.json('thumbnail').nullable() // Task Image
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

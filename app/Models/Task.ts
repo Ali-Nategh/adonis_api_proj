@@ -10,6 +10,10 @@ export default class Task extends BaseModel {
   public id: number
 
   @column()
+  public priorityId: number
+
+
+  @column()
   public userId: number
 
   @column()
