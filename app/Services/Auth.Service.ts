@@ -7,7 +7,7 @@ class AuthService {
 
     public static async register(ctx: HttpContextContract) {
         const user = await UsersService.store(ctx)
-        return `Account Successfully Registered: \n ${JSON.stringify(user)}`
+        return ['Account Successfully Registered:', user]
     }
 
     public static async verify(ctx: HttpContextContract) {
@@ -32,7 +32,7 @@ class AuthService {
             throw new Error('Bad Request: Wrong Email Or Password')
         }
 
-        return 'Successfully Logged In'
+        return (['Successfully Logged In: ', user])
     }
 }
 
