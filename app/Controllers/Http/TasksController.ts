@@ -13,26 +13,46 @@ export default class TasksController {
   }
 
   // POST /users/:user_id/tasks
-  public async store({ }: HttpContextContract) {
-
+  public async store(ctx: HttpContextContract) {
+    try {
+      return await TaskService.store(ctx)
+    } catch (error) {
+      console.log(error)
+      return error.message
+    }
     return
   }
 
   // GET /users/:user_id/tasks/:id
-  public async show({ }: HttpContextContract) {
-
+  public async show(ctx: HttpContextContract) {
+    try {
+      return await TaskService.show(ctx)
+    } catch (error) {
+      console.log(error)
+      return error.message
+    }
     return
   }
 
   // PUT-PATCH /users/:user_id/tasks/:id
-  public async update({ }: HttpContextContract) {
-
+  public async update(ctx: HttpContextContract) {
+    try {
+      return await TaskService.update(ctx)
+    } catch (error) {
+      console.log(error)
+      return error.message
+    }
     return
   }
 
   // DELETE /users/:user_id/tasks/:id
-  public async destroy({ }: HttpContextContract) {
-
+  public async destroy(ctx: HttpContextContract) {
+    try {
+      return await TaskService.destroy(ctx)
+    } catch (error) {
+      console.log(error)
+      return error.message
+    }
     return
   }
 }
