@@ -1,17 +1,28 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class TasksController {
-  public async index({}: HttpContextContract) {}
+  public async index({ }: HttpContextContract) {
 
-  public async create({}: HttpContextContract) {}
+    return
+  }
 
-  public async store({}: HttpContextContract) {}
+  public async store({ }: HttpContextContract) {
 
-  public async show({}: HttpContextContract) {}
+    return
+  }
 
-  public async edit({}: HttpContextContract) {}
+  public async show({ }: HttpContextContract) {
 
-  public async update({}: HttpContextContract) {}
+    return
+  }
 
-  public async destroy({}: HttpContextContract) {}
+  public async update({ }: HttpContextContract) {
+
+    return
+  }
+
+  public async destroy({ }: HttpContextContract) {
+
+    return
+  }
 }
