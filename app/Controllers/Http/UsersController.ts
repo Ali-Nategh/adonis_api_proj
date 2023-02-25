@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import UsersService from 'App/Services/UsersService';
+import UsersService from 'App/Services/Users.Service';
 
 
 export default class UsersController {
-  // GET users
+  // GET /users
   public async index(ctx: HttpContextContract) {
     try {
       return await UsersService.index(ctx)
@@ -13,8 +13,7 @@ export default class UsersController {
     }
   }
 
-
-  // POST users
+  // POST /users
   public async store(ctx: HttpContextContract) {
     try {
       return await UsersService.store(ctx)
@@ -24,8 +23,7 @@ export default class UsersController {
     }
   }
 
-
-  // GET user:id
+  // GET /users:id
   public async show(ctx: HttpContextContract) {
     try {
       return await UsersService.show(ctx)
@@ -35,8 +33,7 @@ export default class UsersController {
     }
   }
 
-
-  // PATCH/PUT user:id
+  // PATCH-PUT /users:id
   public async update(ctx: HttpContextContract) {
     try {
       return await UsersService.update(ctx)
@@ -46,8 +43,7 @@ export default class UsersController {
     }
   }
 
-
-  // DELETE user:id
+  // DELETE /users:id
   public async destroy(ctx: HttpContextContract) {
     try {
       return await UsersService.destroy(ctx)
