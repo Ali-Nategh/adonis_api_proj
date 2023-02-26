@@ -32,7 +32,7 @@ Route.resource('users.tasks', 'TasksController').apiOnly()
 
 Route.post('/register', 'AuthController.register')
 
-Route.post('/forgotPassword', 'AuthController.verify')
+Route.post('/forgotPassword', 'AuthController.forgotPassword')
 
 Route.post('/verify', 'AuthController.verify')
 
