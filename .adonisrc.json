@@ -22,8 +22,7 @@
     "@adonisjs/core",
     "@adonisjs/lucid",
     "@adonisjs/attachment-lite",
-    "@adonisjs/auth",
-    "@adonisjs/session"
+    "@adonisjs/auth"
   ],
   "aceProviders": [
     "@adonisjs/repl"
