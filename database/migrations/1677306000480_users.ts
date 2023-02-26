@@ -12,10 +12,10 @@ export default class extends BaseSchema {
         .notNullable().onDelete('CASCADE').defaultTo(Roles.MEMBER)
 
       table.string('email', 255).unique().notNullable()
-      table.string('password', 180).notNullable()
       table.string('username', 30).unique().notNullable()
+      table.string('password', 180).notNullable()
 
-      table.integer('age').unique().unsigned().nullable()
+      table.integer('age').unsigned().nullable()
       table.string('name', 15).nullable()
       table.string('family_name', 15).nullable()
       table.string('remember_me_token').nullable()
