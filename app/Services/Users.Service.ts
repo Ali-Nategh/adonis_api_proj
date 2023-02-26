@@ -1,7 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import User from "App/Models/User";
-import Roles from 'App/Enums/Roles';
 import Profile from 'App/Models/Profile';
+import User from "App/Models/User";
 
 class UsersService {
     public static async index({ }: HttpContextContract) {
@@ -10,20 +9,7 @@ class UsersService {
     }
 
 
-    public static async store({ request, response }: HttpContextContract) {
-        const user = new User();
-        const user_data = {
-            ...request.only(
-                ['username', 'email', 'password', 'age', 'name', 'familyName']
-            ),
-            roleId: Roles.MEMBER
-        }
-
-        if (!user_data.email || !user_data.password || !user_data.username) {
-            response.status(400)
-            throw new Error('Bad Request: email, password and username are required')
-        }
-
+    public static async store(user_data, profile_data, { response }: HttpContextContract) {
         const email_exists = await User.findBy('email', user_data.email)
         if (email_exists) {
             response.status(400)
@@ -34,15 +20,10 @@ class UsersService {
             response.status(400)
             throw new Error('Bad Request: Username already exists')
         }
-        await user.merge(user_data).save()
+        const user = await User.create(user_data)
 
-
-        const profile = new Profile()
-        const profile_data = {
-            ...request.only(['biography', 'picture']),
-            userId: user.id,
-        }
-        await profile.merge(profile_data).save()
+        profile_data.userId = user.id
+        const profile = await Profile.create(profile_data)
 
         return ([user, profile])
     }
@@ -53,18 +34,16 @@ class UsersService {
     }
 
 
-    public static async update(ctx: HttpContextContract) {
+    public static async update(user_data, profile_data, ctx: HttpContextContract) {
         const user = await this.findUserById(ctx)
         const profile = await Profile.findBy('user_id', user.id)
-
-        const user_data = ctx.request.only(['username', 'email', 'password', 'age', 'name', 'familyName'])
-        const profile_data = ctx.request.only(['biography', 'picture'])
 
         const username_exists = await User.findBy('username', user_data.username)
         if (username_exists) {
             ctx.response.status(400)
             throw new Error('Bad Request: Username already exists')
         }
+
         await user.merge(user_data).save()
         profile && await profile.merge(profile_data).save()
 

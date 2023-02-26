@@ -1,5 +1,4 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Priorities from 'App/Enums/Priorities';
 import Task from 'App/Models/Task';
 import User from 'App/Models/User';
 
@@ -15,30 +14,19 @@ class TaskService {
         return tasks
     }
 
-    public static async store({ request, response }: HttpContextContract) {
+    public static async store(task_data, { request, response }: HttpContextContract) {
         const user_id = request.params().user_id
-
-        const task = new Task();
-        const data = {
-            ...request.only(
-                ['title', 'body', 'thumbnail']
-            ),
-            userId: user_id,
-            priorityId: Priorities.LOW,
-        }
 
         const user = await User.findBy('id', user_id)
         if (!user) {
             response.status(404)
             throw new Error('Not Found: user not found')
         }
+        task_data.userId = user_id
 
-        if (!data.title) {
-            response.status(400)
-            throw new Error('Bad Request: task title is required')
-        }
+        const task = new Task();
+        await task.merge(task_data).save()
 
-        await task.merge(data).save()
         return task;
     }
 
@@ -46,12 +34,11 @@ class TaskService {
         return await this.findTaskById(ctx)
     }
 
-    public static async update(ctx: HttpContextContract) {
+    public static async update(task_data, ctx: HttpContextContract) {
         const task = await this.findTaskById(ctx)
 
-        const data = ctx.request.only(['title', 'body', 'thumbnail'])
+        await task.merge(task_data).save()
 
-        await task.merge(data).save()
         return task
     }
 
