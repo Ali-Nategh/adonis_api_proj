@@ -1,7 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import UsersService from './Users.Service'
-import User from "App/Models/User";
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import UsersService from './Users.Service'
 
 class AuthService {
 
