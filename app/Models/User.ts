@@ -1,4 +1,8 @@
-import { BaseModel, column, BelongsTo, belongsTo, HasOne, hasOne, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  HasOne, hasOne, hasMany, HasMany, beforeSave,
+  BaseModel, column, BelongsTo, belongsTo,
+} from '@ioc:Adonis/Lucid/Orm'
+import Hash from '@ioc:Adonis/Core/Hash'
 import Profile from 'App/Models/Profile'
 import Role from 'App/Models/Role'
 import Task from 'App/Models/Task'
@@ -15,7 +19,7 @@ export default class User extends BaseModel {
   @column()
   public email: string
 
-  @column()
+  @column({ serializeAs: null })
   public password: string
 
   @column()
@@ -39,6 +43,14 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+
+  @beforeSave()
+  public static async hashPassword(user: User) {
+    if (user.$dirty.password) {
+      user.password = await Hash.make(user.password)
+    }
+  }
 
 
   @belongsTo(() => Role)
