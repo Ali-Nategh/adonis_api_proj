@@ -6,10 +6,10 @@ Validation and Authentication have been implemented.
 ## How To Use:
 
 Clone the project and start the app with:
-``` 
-npm run dev 
-```
+``` npm run dev ```
+
 Now you can open postman and test these routes (on http://localhost:3333):
+
 ### Users:
 ```
 GET:
@@ -67,4 +67,43 @@ POST:
 POST:
 /logout
 (enter Bearer Token, revokes the token)
+```
+
+## Models:
+
+### Users:
+```
+id                (database generated)
+roleId            (relation)
+email             (unique, 255)
+password          (hashed, 180)
+username          (unique, 30)
+age               (optional)
+name              (optional, 15)
+familyName        (optional, 15)
+rememberMeToken   (optional)
+created_at        (database generated)
+updated_at        (database generated)
+```
+
+### Profiles:
+```
+id                (database generated)
+userId            (relation)
+biography         (optional)
+picture           (json, optional)
+created_at        (database generated)
+updated_at        (database generated)
+```
+
+### Tasks:
+```
+id                (database generated)
+priorityId        (relation)
+userId            (relation)
+title             (100)
+body              (optional)
+thumbnail         (json, optional)
+created_at        (database generated)
+updated_at        (database generated)
 ```
