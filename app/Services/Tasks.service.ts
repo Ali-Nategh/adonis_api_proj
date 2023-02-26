@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Database from '@ioc:Adonis/Lucid/Database';
 import Task from 'App/Models/Task';
 import User from 'App/Models/User';
 
@@ -10,8 +11,14 @@ class TaskService {
             throw new Error('Not Found: user not found')
         }
 
-        const tasks = await Task.all();
-        return tasks
+        const { page, page_size } = request.qs()
+
+        if (!page && !page_size) {
+            const tasks = await Task.all();
+            return tasks
+        }
+        const tasks = await Database.from('tasks').paginate(page, page_size)
+        return ([...tasks])
     }
 
     public static async store(task_data, { request, response }: HttpContextContract) {

@@ -1,11 +1,18 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Database from '@ioc:Adonis/Lucid/Database';
 import Profile from 'App/Models/Profile';
 import User from "App/Models/User";
 
 class UsersService {
-    public static async index({ }: HttpContextContract) {
-        const users = await User.all();
-        return users
+    public static async index({ request }: HttpContextContract) {
+        const { page, page_size } = request.qs()
+
+        if (!page && !page_size) {
+            const users = await User.all();
+            return users
+        }
+        const users = await Database.from('users').paginate(page, page_size)
+        return ([...users])
     }
 
 
