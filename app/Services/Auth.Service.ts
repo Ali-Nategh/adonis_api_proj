@@ -26,10 +26,9 @@ class AuthService {
 
         await UsersService.store(user_data, profile_data, ctx)
 
-        const login_user = await User.findBy('email', user_data.email)
-        login_user && await ctx.auth.login(login_user)
+        // const login_user = await User.findBy('email', user_data.email)
+        // login_user && await ctx.auth.login(login_user)
 
-        return ctx.response.redirect().toPath('/')
         return (['Successfully Registered Account: ',])
     }
 
@@ -44,19 +43,18 @@ class AuthService {
             throw new Error('Bad Request: Email And Password Are Required')
         }
 
-        try {
-            await auth.attempt(user_data.email, user_data.password)
-        } catch (_error) {
-            session.flash('errors', 'Email or Password is Incorrect')
-            return response.redirect().back()
-        }
+        // try {
+        //     return await auth.attempt(user_data.email, user_data.password)
+        // } catch (_error) {
+        //     return session.flash('errors', 'Email or Password is Incorrect')
+        // }
 
         // return response.redirect().toPath('/')
         return (['Successfully Logged In: ',])
     }
 
-    public static async logout({ response, auth }: HttpContextContract) {
-        await auth.logout()
+    public static async logout(ctx: HttpContextContract) {
+        // await auth.logout()
         // return response.redirect().toPath('/')
         return (['Successfully Logged Out: ',])
     }
