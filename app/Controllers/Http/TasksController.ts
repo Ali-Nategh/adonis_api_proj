@@ -1,5 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import TaskService from 'App/Services/Tasks.service'
+
 
 export default class TasksController {
   // GET /users/:user_id/tasks
@@ -14,8 +16,17 @@ export default class TasksController {
 
   // POST /users/:user_id/tasks
   public async store(ctx: HttpContextContract) {
+    const taskSchema = schema.create({
+      title: schema.string([rules.maxLength(100)]),
+      body: schema.string.optional(),
+      thumbnail: schema.string.optional(),
+      // thumbnail: schema.file.optional(),
+    })
+
+    const task_data = await ctx.request.validate({ schema: taskSchema })
+
     try {
-      return await TaskService.store(ctx)
+      return await TaskService.store(task_data, ctx)
     } catch (error) {
       console.log(error)
       return error.message
@@ -36,8 +47,17 @@ export default class TasksController {
 
   // PUT-PATCH /users/:user_id/tasks/:id
   public async update(ctx: HttpContextContract) {
+    const updateTaskSchema = schema.create({
+      title: schema.string.optional([rules.maxLength(100)]),
+      body: schema.string.optional(),
+      thumbnail: schema.string.optional(),
+      // thumbnail: schema.file.optional(),
+    })
+
+    const task_data = await ctx.request.validate({ schema: updateTaskSchema })
+
     try {
-      return await TaskService.update(ctx)
+      return await TaskService.update(task_data, ctx)
     } catch (error) {
       console.log(error)
       return error.message
