@@ -69,6 +69,8 @@ POST:
 (enter Bearer Token, revokes the token)
 ```
 
+<hr>
+
 ## Models:
 
 ### Users:
@@ -107,6 +109,8 @@ thumbnail         (json, optional)
 created_at        (database generated)
 updated_at        (database generated)
 ```
+
+<hr>
 
 ## ENUMS:
 
