@@ -12,13 +12,42 @@ class TaskService {
         }
 
         const { page, page_size } = request.qs()
-
-        if (!page && !page_size) {
-            const tasks = await Task.all();
-            return tasks
+        if (page != null || page_size != null) {
+            const tasks = await Database.from('tasks').paginate(page, page_size)
+            return ([...tasks])
         }
-        const tasks = await Database.from('tasks').paginate(page, page_size)
-        return ([...tasks])
+
+        const { search } = request.qs()
+        if (search) {
+            const task_find = await Database.from('tasks').whereILike('title', `%${search}%`)
+            return task_find
+        }
+
+        const { sort, sort_type } = request.qs()
+        if (sort != null && sort_type != null) {
+            if (sort === 'created_at') {
+                if (sort_type === 'asc') {
+                    return await Database.from('tasks').orderBy('created_at', 'asc')
+                }
+                if (sort_type === 'desc') {
+                    return await Database.from('tasks').orderBy('created_at', 'desc')
+                }
+            }
+            if (sort === 'name') {
+                if (sort_type === 'asc') {
+                    return await Database.from('tasks').orderBy('title', 'asc')
+                }
+                if (sort_type === 'desc') {
+                    return await Database.from('tasks').orderBy('title', 'desc')
+                }
+            }
+            response.status(400)
+            return 'Bad Request: sort(created_at/name) or sort_type(asc/desc) wrong, please use these'
+        }
+
+        const tasks = await Task.all();
+        return tasks
+
     }
 
     public static async store(task_data, { request, response }: HttpContextContract) {
