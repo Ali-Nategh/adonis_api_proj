@@ -1,4 +1,5 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+import Priorities from 'App/Enums/Priorities'
 
 export default class extends BaseSchema {
   protected tableName = 'tasks'
@@ -6,9 +7,12 @@ export default class extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
+
       table.integer('user_id').unsigned().references('id').inTable('users')
         .notNullable().onDelete('CASCADE')
-      table.integer('priority_id').unsigned().references('id').inTable('priorities').notNullable()
+
+      table.integer('priority_id').unsigned().references('id').inTable('priorities')
+        .notNullable().defaultTo(Priorities.LOW)
 
       table.string('title', 100).notNullable()
       table.text('body').nullable()

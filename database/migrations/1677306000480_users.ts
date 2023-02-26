@@ -1,4 +1,5 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
+import Roles from 'App/Enums/Roles'
 
 export default class extends BaseSchema {
   protected tableName = 'users'
@@ -6,10 +7,11 @@ export default class extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table.integer('role_id').unsigned().references('id').inTable('roles')
-        .notNullable().onDelete('CASCADE')
 
-      table.string('email', 45).unique().notNullable()
+      table.integer('role_id').unsigned().references('id').inTable('roles')
+        .notNullable().onDelete('CASCADE').defaultTo(Roles.MEMBER)
+
+      table.string('email', 255).unique().notNullable()
       table.string('password', 180).notNullable()
       table.string('username', 30).unique().notNullable()
 
