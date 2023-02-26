@@ -15,6 +15,9 @@ Now you can open postman and test these routes (on http://localhost:3333):
 GET:
 /users
 (returns all users)
+Optional Query Strings:
+- pagination: ?page=1&page_size=2
+
 
 GET:
 /users/:id
@@ -37,6 +40,10 @@ DELETE:
 GET:
 /users/id:/tasks
 (returns all tasks from a user by user_id)
+Optional Query Strings:
+- pagination: ?page=1&page_size=2
+- searching title: ?search=something
+- sorting: ?sort=name&sort_type=asc [sort: name/created_at, sort_type: asc/desc]
 
 GET:
 /users/id:/tasks/:id
