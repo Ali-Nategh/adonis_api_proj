@@ -21,4 +21,14 @@ export default class AuthController {
             return error.message
         }
     }
+
+    // POST /login
+    public async logout(ctx: HttpContextContract) {
+        try {
+            return AuthService.logout(ctx)
+        } catch (error) {
+            console.log(error)
+            return error.message
+        }
+    }
 }

@@ -35,3 +35,5 @@ Route.post('/register', 'AuthController.register')
 Route.post('/verify', 'AuthController.verify')
 
 Route.post('/login', 'AuthController.login')
+
+Route.post('/logout', 'AuthController.logout')

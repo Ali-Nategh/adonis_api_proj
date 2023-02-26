@@ -34,6 +34,10 @@ class AuthService {
 
         return (['Successfully Logged In: ', user])
     }
+
+    public static async logout(ctx: HttpContextContract) {
+        return (['Successfully Logged Out: ',])
+    }
 }
 
 
