@@ -5,8 +5,13 @@ Validation and Authentication have been implemented.
 
 ## How To Use:
 
-Clone the project and start the app with:
-``` npm run dev ```
+Clone the project, go inside it and install packages with: ` npm install `
+
+Create a `.env` file, example is in ` .env.example `
+
+You will need a mysql server running as this project is in mysql. configure the `.env` file as it fits you.
+
+Start the app with: ` npm node serve `
 
 Now you can open postman and test these routes (on http://localhost:3333):
 
