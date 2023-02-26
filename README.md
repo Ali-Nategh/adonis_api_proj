@@ -12,25 +12,59 @@ npm run dev
 Now you can open postman and test these routes (on http://localhost:3333):
 ### Users:
 ```
-GET
+GET:
+/users
+(returns all users)
 
+GET:
+/users/:id
+(returns user by id)
+
+POST:
+/users/:id
+(enter user information, creates user by id)
+
+PATCH-PUT:
+/users/:id
+(enter user information, edits user by id)
+
+DELETE:
+/users/:id
+(deletes user by id)
 ```
 ### Tasks:
 ```
-GET
+GET:
+/users/id:/tasks
+(returns all tasks from a user by user_id)
 
+GET:
+/users/id:/tasks/:id
+(returns a task from a user by user_id and task id)
+
+POST:
+/users/id:/tasks/:id
+(enter user information, creates a task from a user by user_id and task id)
+
+PATCH-PUT:
+/users/id:/tasks/:id
+(enter user information, edits a task from a user by user_id and task id)
+
+DELETE:
+/users/id:/tasks/:id
+(deletes a task from a user by user_id and task id)
 ```
 ### Auth:
 ```
-POST
+POST:
 /register
 (enter user information to create and login user, returns bearer token)
 
-POST
+POST:
 /login
 (enter email and password, returns bearer token)
 
-POST
+POST:
 /logout
 (enter Bearer Token, revokes the token)
 ```
