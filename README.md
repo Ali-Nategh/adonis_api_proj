@@ -107,3 +107,19 @@ thumbnail         (json, optional)
 created_at        (database generated)
 updated_at        (database generated)
 ```
+
+## ENUMS:
+
+### Roles:
+```
+MEMBER
+PROMEMBER
+MODERATOR
+ADMIN
+```
+### Priorities:
+```
+LOW
+MEDIUM
+HIGH
+```
