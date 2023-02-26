@@ -26,8 +26,8 @@ class AuthService {
 
         await UsersService.store(user_data, profile_data, ctx)
 
-        // const login_user = await User.findBy('email', user_data.email)
-        // login_user && await ctx.auth.login(login_user)
+        // TODO token
+
 
         return (['Successfully Registered Account: ',])
     }
@@ -36,26 +36,21 @@ class AuthService {
         return ([`Email Successfully Verified:`, ctx.request.body])
     }
 
-    public static async login({ request, response, session, auth }: HttpContextContract) {
+    public static async login({ request, response, auth }: HttpContextContract) {
         const user_data = request.only(['email', 'password'])
         if (!user_data.email || !user_data.password) {
             response.status(400)
             throw new Error('Bad Request: Email And Password Are Required')
         }
 
-        // try {
-        //     return await auth.attempt(user_data.email, user_data.password)
-        // } catch (_error) {
-        //     return session.flash('errors', 'Email or Password is Incorrect')
-        // }
+        // TODO token
 
-        // return response.redirect().toPath('/')
         return (['Successfully Logged In: ',])
     }
 
     public static async logout(ctx: HttpContextContract) {
-        // await auth.logout()
-        // return response.redirect().toPath('/')
+        // TODO token
+
         return (['Successfully Logged Out: ',])
     }
 }
