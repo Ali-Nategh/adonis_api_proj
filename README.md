@@ -1,24 +1,36 @@
 # AdonisJS API Project
 
-Users have:
-  - A Profile
-  - Tasks
-  - A Role
+A blog project, users have tasks and a profile, they can create and edit these and delete them.
+Validation and Authentication have been implemented.
 
-Routes:
+## How To Use:
+
+Clone the project and start the app with:
+``` 
+npm run dev 
 ```
-Method	      Path	                      Handler	                  Name	   
-GET,HEAD	    /users	                    UsersController.index	    users.index	
-POST	        /users	                    UsersController.store 	  users.store	
-GET,HEAD	    /users/:id	                UsersController.show	    users.show	
-PUT,PATCH	    /users/:id	                UsersController.update	  users.update	
-DELETE	      /users/:id	                UsersController.destroy	  users.destroy	
-GET,HEAD	    /users/:user_id/tasks	      TasksController.index 	  users.tasks.index	
-POST	        /users/:user_id/tasks	      TasksController.store	    users.tasks.store	
-GET,HEAD	    /users/:user_id/tasks/:id	  TasksController.show	    users.tasks.show	
-PUT,PATCH	    /users/:user_id/tasks/:id	  TasksController.update	  users.tasks.update	
-DELETE	      /users/:user_id/tasks/:id	  TasksController.destroy 	users.tasks.destroy	
-POST	        /register	                  AuthController.register		
-POST	        /verify	                    AuthController.verify		
-POST	        /login	                    AuthController.login
+Now you can open postman and test these routes (on http://localhost:3333):
+### Users:
+```
+GET
+
+```
+### Tasks:
+```
+GET
+
+```
+### Auth:
+```
+POST
+/register
+(enter user information to create and login user, returns bearer token)
+
+POST
+/login
+(enter email and password, returns bearer token)
+
+POST
+/logout
+(enter Bearer Token, revokes the token)
 ```
