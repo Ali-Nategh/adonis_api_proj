@@ -24,12 +24,15 @@ class AuthService {
         const user_data = await ctx.request.validate({ schema: userSchema })
         const profile_data = await ctx.request.validate({ schema: profileSchema })
 
-        await UsersService.store(user_data, profile_data, ctx)
+        const user = await UsersService.store(user_data, profile_data, ctx)
 
-        // TODO token
-
-
-        return (['Successfully Registered Account: ',])
+        try {
+            const token = await ctx.auth.use('api')
+                .attempt(user_data.email, user_data.password, { expiresIn: '20s' })
+            return (['Successfully Registered Account: ', user, token,])
+        } catch {
+            return ctx.response.unauthorized('Invalid credentials')
+        }
     }
 
     public static async verify(ctx: HttpContextContract) {
@@ -43,15 +46,21 @@ class AuthService {
             throw new Error('Bad Request: Email And Password Are Required')
         }
 
-        // TODO token
-
-        return (['Successfully Logged In: ',])
+        try {
+            const token = await auth.use('api')
+                .attempt(user_data.email, user_data.password, { expiresIn: '2h' })
+            return (['Successfully Logged In: ', user_data, token])
+        } catch {
+            return response.unauthorized('Invalid credentials')
+        }
     }
 
-    public static async logout(ctx: HttpContextContract) {
-        // TODO token
+    public static async logout({ auth }: HttpContextContract) {
+        await auth.use('api').authenticate()
+        const user = auth.use('api').user!
+        await auth.use('api').revoke()
 
-        return (['Successfully Logged Out: ',])
+        return (['Successfully Logged Out:', user,])
     }
 }
 
