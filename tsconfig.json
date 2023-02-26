@@ -32,7 +32,6 @@
       "@adonisjs/lucid",
       "@adonisjs/attachment-lite",
       "@adonisjs/auth",
-      "@adonisjs/session"
     ]
   }
 }
