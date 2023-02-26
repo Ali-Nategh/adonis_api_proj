@@ -8,11 +8,11 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
 
+      table.integer('priority_id').unsigned().references('id').inTable('priorities')
+        .notNullable().onDelete('CASCADE').defaultTo(Priorities.LOW)
+
       table.integer('user_id').unsigned().references('id').inTable('users')
         .notNullable().onDelete('CASCADE')
-
-      table.integer('priority_id').unsigned().references('id').inTable('priorities')
-        .notNullable().defaultTo(Priorities.LOW)
 
       table.string('title', 100).notNullable()
       table.text('body').nullable()
