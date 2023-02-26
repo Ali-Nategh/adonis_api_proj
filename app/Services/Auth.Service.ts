@@ -34,6 +34,10 @@ class AuthService {
         }
     }
 
+    public static async forgotPassword(ctx: HttpContextContract) {
+        return ([``, ctx.request.body])
+    }
+
     public static async verify(ctx: HttpContextContract) {
         return ([`Email Successfully Verified:`, ctx.request.body])
     }

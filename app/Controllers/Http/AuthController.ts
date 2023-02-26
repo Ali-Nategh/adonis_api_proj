@@ -12,6 +12,16 @@ export default class AuthController {
         }
     }
 
+    // POST /forgotPassword
+    public async forgotPassword(ctx: HttpContextContract) {
+        try {
+            return AuthService.forgotPassword(ctx)
+        } catch (error) {
+            console.log(error)
+            return error.message
+        }
+    }
+
     // POST /login
     public async login(ctx: HttpContextContract) {
         try {
