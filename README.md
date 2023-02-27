@@ -13,11 +13,15 @@ Validation and Authentication have been implemented.
 
 4 - Generate a key with: ` node ace generate:key ` and add/replace it in your `.env` APP_KEY.
 
-4 - Migrate the database with: ` node ace migration:run `
+5 - Migrate the database with: ` node ace migration:run `
 
-5 - The Roles/Priorities seeds will be automatically added to their tables in the database using thier Enums.
+6 - Generate some test info in db if you want, using: ` node ace db:seed `
 
-6 - Start the app with: ` npm node serve `
+(The Roles/Priorities will be automatically inserted to their tables in the database using thier Enums)
+
+7 - Start the app with: ` npm node serve `
+
+(At any point you can use ` node ace migration:refresh ` if you want to remove the existing data from database and reset)
 
 Now you can open postman and test these routes (on http://localhost:3333):
 
