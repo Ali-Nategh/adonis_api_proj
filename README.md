@@ -1,27 +1,27 @@
 # AdonisJS API Project
 
-A blog project, users have tasks and a profile, they can create and edit these and delete them.
-Validation and Authentication have been implemented.
+A blog project, users have a profile and some tasks, they can create, edit and delete them.
+Validation and Authentication have also been implemented.
 
 ## How To Use: (Windows/Linux)
 
-1 - Clone the project, go inside the folder and install packages with: ` npm install `
+1 - Clone the project, go inside the folder and install packages with: `npm install`
 
-2 - Create a `.env` file, examples are in ` .env.example ` you can just copy them for now.
+2 - Create a `.env` file, examples are in `.env.example` you can just copy them for now.
 
-3 - You will need a MySQL server running, also create the user and database you want to use inside the `.env` file.
+3 - You will need a MySQL server running, also create the `user` and `database` you want to use inside the `.env` file.
 
-4 - Generate a key with: ` node ace generate:key ` and add/replace it in your `.env` APP_KEY.
+4 - You can generate an app key with: `node ace generate:key` and add/replace it in your `.env` APP_KEY.
 
-5 - Migrate the database with: ` node ace migration:run `
-
-6 - Generate some test info in db if you want, using: ` node ace db:seed `
+5 - Migrate the database with: `node ace migration:run`
 
 (The Roles/Priorities will be automatically inserted to their tables in the database using thier Enums)
 
-7 - Start the app with: ` npm node serve `
+6 - You can automatically generate some info in the database if you want, using: `node ace db:seed`
 
-(At any point you can use ` node ace migration:refresh ` if you want to remove the existing data from database and reset)
+7 - Now start the app with: `npm node serve`
+
+(At any point you can use `node ace migration:refresh` if you want to remove the existing data from database or make any changes to migrations)
 
 Now you can open postman and test these routes (on http://localhost:3333):
 
@@ -32,7 +32,6 @@ GET:
 (returns all users and their profiles)
 Optional Query Strings:
 - pagination: ?page=1&page_size=2
-
 
 GET:
 /users/:id
