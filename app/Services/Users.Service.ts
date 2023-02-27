@@ -8,7 +8,7 @@ class UsersService {
         const { page, page_size } = request.qs()
 
         if (!page && !page_size) {
-            const users = await User.all();
+            const users = await Database.from('users').join('profiles', 'profiles.user_id', 'users.id')
             return users
         }
         const users = await Database.from('users').paginate(page, page_size)
