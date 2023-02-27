@@ -3,7 +3,15 @@
 A blog project, users have a profile and some tasks, they can create, edit and delete them.
 Validation and Authentication have also been implemented.
 
-## How To Use: (Windows/Linux)
+* User Manual:
+  * [How To Set Up And Use](#setup)
+  * [Routes](#routes)
+  * [Models](#models)
+  * [ENUMS](#enums)
+
+
+## Setup
+### How To Use (Windows/Linux)
 
 1 - Clone the project, go inside the folder and install packages with: `npm install`
 
@@ -25,6 +33,7 @@ Validation and Authentication have also been implemented.
 
 Now you can open postman and test these routes (on http://localhost:3333):
 
+## Routes:
 ### Users:
 ```
 GET:
