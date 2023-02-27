@@ -3,13 +3,13 @@
 A blog project, users have tasks and a profile, they can create and edit these and delete them.
 Validation and Authentication have been implemented.
 
-## How To Use:
+## How To Use: (Windows/Linux)
 
-1 - Clone the project, go inside it and install packages with: ` npm install `
+1 - Clone the project, go inside the folder and install packages with: ` npm install `
 
-2 - Create a `.env` file, examples are in ` .env.example ` you can just copy them.
+2 - Create a `.env` file, examples are in ` .env.example ` you can just copy them for now.
 
-3 - You will need a MySQL server running, create the user and database you used in the `.env` file.
+3 - You will need a MySQL server running, also create the user and database you want to use inside the `.env` file.
 
 4 - Generate a key with: ` node ace generate:key ` and add/replace it in your `.env` APP_KEY.
 
