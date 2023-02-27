@@ -19,7 +19,7 @@ Now you can open postman and test these routes (on http://localhost:3333):
 ```
 GET:
 /users
-(returns all users)
+(returns all users and their profiles)
 Optional Query Strings:
 - pagination: ?page=1&page_size=2
 
