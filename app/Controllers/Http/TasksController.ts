@@ -19,8 +19,7 @@ export default class TasksController {
     const taskSchema = schema.create({
       title: schema.string([rules.maxLength(100)]),
       body: schema.string.optional(),
-      thumbnail: schema.string.optional(),
-      // thumbnail: schema.file.optional(),
+      thumbnail: schema.file.optional(),
     })
 
     const task_data = await ctx.request.validate({ schema: taskSchema })
@@ -50,8 +49,7 @@ export default class TasksController {
     const updateTaskSchema = schema.create({
       title: schema.string.optional([rules.maxLength(100)]),
       body: schema.string.optional(),
-      thumbnail: schema.string.optional(),
-      // thumbnail: schema.file.optional(),
+      thumbnail: schema.file.optional(),
     })
 
     const task_data = await ctx.request.validate({ schema: updateTaskSchema })

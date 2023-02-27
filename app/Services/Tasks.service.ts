@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { Attachment } from '@ioc:Adonis/Addons/AttachmentLite';
 import Database from '@ioc:Adonis/Lucid/Database';
 import Task from 'App/Models/Task';
 import User from 'App/Models/User';
@@ -58,10 +59,13 @@ class TaskService {
             response.status(404)
             throw new Error('Not Found: user not found')
         }
-        task_data.userId = user_id
 
         const task = new Task();
-        await task.merge(task_data).save()
+        task.userId = user_id
+        task.title = task_data.title
+        if (task_data.body) task.body = task_data.body
+        if (task_data.thumbnail) task.thumbnail = Attachment.fromFile(task_data.thumbnail)
+        await task.save()
 
         return task;
     }
@@ -73,7 +77,10 @@ class TaskService {
     public static async update(task_data, ctx: HttpContextContract) {
         const task = await this.findTaskById(ctx)
 
-        await task.merge(task_data).save()
+        if (task_data.title) task.title = task_data.title
+        if (task_data.body) task.body = task_data.body
+        if (task_data.thumbnail) task.thumbnail = Attachment.fromFile(task_data.thumbnail)
+        await task.save()
 
         return task
     }

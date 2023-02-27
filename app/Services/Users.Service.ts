@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { Attachment } from '@ioc:Adonis/Addons/AttachmentLite'
 import Database from '@ioc:Adonis/Lucid/Database';
 import Profile from 'App/Models/Profile';
 import User from "App/Models/User";
@@ -29,8 +30,11 @@ class UsersService {
         }
         const user = await User.create(user_data)
 
-        profile_data.userId = user.id
-        const profile = await Profile.create(profile_data)
+        const profile = new Profile()
+        profile.userId = user.id
+        if (profile_data.picture) profile.picture = Attachment.fromFile(profile_data.picture)
+        if (profile_data.biography) profile.biography = profile_data.biography
+        await profile.save()
 
         return ([user, profile])
     }
@@ -45,14 +49,20 @@ class UsersService {
         const user = await this.findUserById(ctx)
         const profile = await Profile.findBy('user_id', user.id)
 
-        const username_exists = await User.findBy('username', user_data.username)
-        if (username_exists) {
-            ctx.response.status(400)
-            throw new Error('Bad Request: Username already exists')
+        if (user_data.username) {
+            const username_exists = await User.findBy('username', user_data.username)
+            if (username_exists) {
+                ctx.response.status(400)
+                throw new Error('Bad Request: Username already exists')
+            }
         }
 
         await user.merge(user_data).save()
-        profile && await profile.merge(profile_data).save()
+        if (profile) {
+            if (profile_data.picture) profile.picture = Attachment.fromFile(profile_data.picture)
+            if (profile_data.biography) profile.biography = profile_data.biography
+            await profile.save()
+        }
 
         return ([user, profile])
     }

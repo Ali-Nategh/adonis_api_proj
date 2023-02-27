@@ -5,12 +5,12 @@ import UsersService from 'App/Services/Users.Service';
 
 const profileSchema = schema.create({
   biography: schema.string.optional(),
-  picture: schema.string.optional(),
-  // picture: schema.file.optional(),
+  picture: schema.file.optional(),
 })
 
 
 export default class UsersController {
+
   // GET /users
   public async index(ctx: HttpContextContract) {
     try {
