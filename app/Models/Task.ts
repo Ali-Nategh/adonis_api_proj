@@ -22,7 +22,7 @@ export default class Task extends BaseModel {
   @column()
   public body: string | null
 
-  @attachment()
+  @attachment({ folder: 'thumbnails', preComputeUrl: true })
   public thumbnail: AttachmentContract | null
 
 
