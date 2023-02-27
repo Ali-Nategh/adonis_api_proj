@@ -5,17 +5,19 @@ Validation and Authentication have been implemented.
 
 ## How To Use:
 
-Clone the project, go inside it and install packages with: ` npm install `
+1 - Clone the project, go inside it and install packages with: ` npm install `
 
-Create a `.env` file, example is in ` .env.example `
+2 - Create a `.env` file, examples are in ` .env.example ` you can just copy them.
 
-You will need a mysql server running as this project is in mysql. configure the `.env` file as it fits you.
+3 - You will need a MySQL server running, create the user and database you used in the `.env` file.
 
-Migrate the database with: ` node ace migration:run `
+4 - Generate a key with: ` node ace generate:key ` and add/replace it in your `.env` APP_KEY.
 
-The Roles/Priorities seeds will be automatically added to their tables in the database using thier Enums.
+4 - Migrate the database with: ` node ace migration:run `
 
-Start the app with: ` npm node serve `
+5 - The Roles/Priorities seeds will be automatically added to their tables in the database using thier Enums.
+
+6 - Start the app with: ` npm node serve `
 
 Now you can open postman and test these routes (on http://localhost:3333):
 
