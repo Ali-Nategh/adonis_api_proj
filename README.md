@@ -11,6 +11,10 @@ Create a `.env` file, example is in ` .env.example `
 
 You will need a mysql server running as this project is in mysql. configure the `.env` file as it fits you.
 
+Migrate the database with: ` node ace migration:run `
+
+The Roles/Priorities seeds will be automatically added to their tables using thier Enums.
+
 Start the app with: ` npm node serve `
 
 Now you can open postman and test these routes (on http://localhost:3333):
