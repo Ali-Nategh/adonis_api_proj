@@ -30,11 +30,11 @@ GET:
 
 POST:
 /users/:id
-(enter user information, creates user by id)
+(enter user information, optional profile picture, creates user by id)
 
 PATCH-PUT:
 /users/:id
-(enter user information, edits user by id)
+(enter user information, optional profile picture, edits user by id)
 
 DELETE:
 /users/:id
@@ -51,19 +51,19 @@ Optional Query Strings:
 - sorting: ?sort=name&sort_type=asc [sort: name/created_at, sort_type: asc/desc]
 
 GET:
-/users/id:/tasks/:id
+/users/:user_id/tasks/:id
 (returns a task from a user by user_id and task id)
 
 POST:
-/users/id:/tasks/:id
-(enter user information, creates a task from a user by user_id and task id)
+/users/:user_id/tasks/:id
+(enter task information, optional thumbnail picture, creates a task for a user by user_id and task id)
 
 PATCH-PUT:
-/users/id:/tasks/:id
-(enter user information, edits a task from a user by user_id and task id)
+/users/:user_id/tasks/:id
+(enter task information, optional thumbnail picture, edits a task for a user by user_id and task id)
 
 DELETE:
-/users/id:/tasks/:id
+/users/:user_id/tasks/:id
 (deletes a task from a user by user_id and task id)
 ```
 ### Auth:
@@ -105,7 +105,7 @@ updated_at        (database generated)
 id                (database generated)
 userId            (relation)
 biography         (optional)
-picture           (json, optional)
+picture           (picture, optional)
 created_at        (database generated)
 updated_at        (database generated)
 ```
@@ -117,7 +117,7 @@ priorityId        (relation)
 userId            (relation)
 title             (100)
 body              (optional)
-thumbnail         (json, optional)
+thumbnail         (picture, optional)
 created_at        (database generated)
 updated_at        (database generated)
 ```
