@@ -3,19 +3,25 @@
 A blog project, users have tasks and a profile, they can create and edit these and delete them.
 Validation and Authentication have been implemented.
 
-## How To Use:
+## How To Use: (Windows/Linux)
 
-Clone the project, go inside it and install packages with: ` npm install `
+1 - Clone the project, go inside the folder and install packages with: ` npm install `
 
-Create a `.env` file, example is in ` .env.example `
+2 - Create a `.env` file, examples are in ` .env.example ` you can just copy them for now.
 
-You will need a mysql server running as this project is in mysql. configure the `.env` file as it fits you.
+3 - You will need a MySQL server running, also create the user and database you want to use inside the `.env` file.
 
-Migrate the database with: ` node ace migration:run `
+4 - Generate a key with: ` node ace generate:key ` and add/replace it in your `.env` APP_KEY.
 
-The Roles/Priorities seeds will be automatically added to their tables in the database using thier Enums.
+5 - Migrate the database with: ` node ace migration:run `
 
-Start the app with: ` npm node serve `
+6 - Generate some test info in db if you want, using: ` node ace db:seed `
+
+(The Roles/Priorities will be automatically inserted to their tables in the database using thier Enums)
+
+7 - Start the app with: ` npm node serve `
+
+(At any point you can use ` node ace migration:refresh ` if you want to remove the existing data from database and reset)
 
 Now you can open postman and test these routes (on http://localhost:3333):
 
