@@ -13,7 +13,7 @@ You will need a mysql server running as this project is in mysql. configure the 
 
 Migrate the database with: ` node ace migration:run `
 
-The Roles/Priorities seeds will be automatically added to their tables using thier Enums.
+The Roles/Priorities seeds will be automatically added to their tables in the database using thier Enums.
 
 Start the app with: ` npm node serve `
 
