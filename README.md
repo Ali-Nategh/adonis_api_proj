@@ -27,7 +27,7 @@ Validation and Authentication have also been implemented.
 
 6 - You can automatically generate some info in the database if you want, using: `node ace db:seed`
 
-7 - Now start the app with: `npm node serve`
+7 - Now start the app with: `npm ace serve`
 
 (At any point you can use `node ace migration:refresh` if you want to remove the existing data from database or make any changes to migrations)
 
